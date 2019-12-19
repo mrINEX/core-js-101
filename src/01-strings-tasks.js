@@ -322,19 +322,82 @@ function isString(value) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  if (value[0] === 'A') {
-    return 0;
+  // '♣'
+  if (value[value.length - 1] === '♣') {
+    if (value[0] === 'A') {
+      return 0;
+    }
+    if (value[0] === 'J') {
+      return 10;
+    }
+    if (value[0] === 'Q') {
+      return 11;
+    }
+    if (value[0] === 'K') {
+      return 12;
+    }
+    if (value.length === 3) {
+      return 9;
+    }
+    return value[0] - 1;
   }
-  if (value[0] === 'J') {
-    return 10;
+  // '♦'
+  if (value[value.length - 1] === '♦') {
+    if (value[0] === 'A') {
+      return 13;
+    }
+    if (value[0] === 'J') {
+      return 23;
+    }
+    if (value[0] === 'Q') {
+      return 24;
+    }
+    if (value[0] === 'K') {
+      return 25;
+    }
+    if (value.length === 3) {
+      return 22;
+    }
+    return Number(value[0]) + 12;
   }
-  if (value[0] === 'Q') {
-    return 11;
+  // '♥'
+  if (value[value.length - 1] === '♥') {
+    if (value[0] === 'A') {
+      return 26;
+    }
+    if (value[0] === 'J') {
+      return 36;
+    }
+    if (value[0] === 'Q') {
+      return 37;
+    }
+    if (value[0] === 'K') {
+      return 38;
+    }
+    if (value.length === 3) {
+      return 35;
+    }
+    return Number(value[0]) + 25;
   }
-  if (value[0] === 'K') {
-    return 12;
+  if (value[value.length - 1] === '♠') {
+    if (value[0] === 'A') {
+      return 39;
+    }
+    if (value[0] === 'J') {
+      return 49;
+    }
+    if (value[0] === 'Q') {
+      return 50;
+    }
+    if (value[0] === 'K') {
+      return 51;
+    }
+    if (value.length === 3) {
+      return 48;
+    }
+    return Number(value[0]) + 38;
   }
-  return value[0] - 1;
+  return value;
 }
 
 
