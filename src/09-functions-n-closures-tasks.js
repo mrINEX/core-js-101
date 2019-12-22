@@ -24,9 +24,7 @@
  *
  */
 function getComposition(f, g) {
-  return function (n) {
-    return f(g(n));
-  };
+  return (n) => f(g(n));
 }
 
 
@@ -87,7 +85,7 @@ function getPolynom() {
  */
 function memoize(func) {
   const gg = func();
-  return function () {
+  return () => {
     let result;
     if (gg !== result) {
       result = gg;
@@ -182,7 +180,7 @@ function partialUsingArguments(/* fn, ...args1 */) {
  */
 function getIdGeneratorFunction(startFrom) {
   let i = -1;
-  return function () {
+  return () => {
     i += 1;
     return startFrom + i;
   };
