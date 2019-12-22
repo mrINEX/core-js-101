@@ -346,8 +346,12 @@ function isCreditCardNumber(ccn) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let sum = num;// String(num).split('').reduce((a, b) => Number(a) + Number(b));
+  while (sum > 9) {
+    sum = String(sum).split('').reduce((a, b) => Number(a) + Number(b));
+  }
+  return sum;
 }
 
 
@@ -372,8 +376,13 @@ function getDigitalRoot(/* num */) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const regex = new RegExp('\\[\\]|\\{\\}|\\(\\)|\\<\\>', 'g');
+  let j = str;
+  for (let i = 0; i < str.length; i += 1) {
+    j = j.replace(regex, '');
+  }
+  return j.length === 0;
 }
 
 
@@ -397,8 +406,14 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  let result = String(num % n);
+  let num2 = num;
+  while (num2 >= n) {
+    num2 = Math.floor(num2 / n);
+    result += num2 % n;
+  }
+  return result.split('').reverse().join('');
 }
 
 
@@ -414,8 +429,20 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const arr = pathes;
+  for (let i = 1; i < arr.length; i += 1) {
+    const prev = arr[i - 1];
+    const curr = arr[i];
+    let count = 0;
+    let result = '';
+    while (prev[count] === curr[count] && result.length < prev.length) {
+      result += curr[count];
+      count += 1;
+    }
+    arr[i] = result;
+  }
+  return arr[arr.length - 1].replace(/\w+$/, '');
 }
 
 
@@ -472,8 +499,24 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if (position[0][0] === 'X' && position[0][1] === 'X' && position[0][2] === 'X') { return 'X'; }
+  if (position[0][0] === '0' && position[0][1] === '0' && position[0][2] === '0') { return '0'; } // 1 2 3
+  if (position[1][0] === 'X' && position[1][1] === 'X' && position[1][2] === 'X') { return 'X'; }
+  if (position[1][0] === '0' && position[1][1] === '0' && position[1][2] === '0') { return '0'; } // 4 5 6
+  if (position[2][0] === 'X' && position[2][1] === 'X' && position[2][2] === 'X') { return 'X'; }
+  if (position[2][0] === '0' && position[2][1] === '0' && position[2][2] === '0') { return '0'; } // 7 8 9
+  if (position[0][0] === 'X' && position[1][0] === 'X' && position[2][0] === 'X') { return 'X'; }
+  if (position[0][0] === '0' && position[1][0] === '0' && position[2][0] === '0') { return '0'; } // 1,4,7
+  if (position[0][1] === 'X' && position[1][1] === 'X' && position[2][1] === 'X') { return 'X'; }
+  if (position[0][1] === '0' && position[1][1] === '0' && position[2][1] === '0') { return '0'; } // 2,5,8
+  if (position[0][2] === 'X' && position[1][2] === 'X' && position[2][2] === 'X') { return 'X'; }
+  if (position[0][2] === '0' && position[1][2] === '0' && position[2][2] === '0') { return '0'; } // 3,6,9
+  if (position[0][0] === 'X' && position[1][1] === 'X' && position[2][2] === 'X') { return 'X'; }
+  if (position[0][0] === '0' && position[1][1] === '0' && position[2][2] === '0') { return '0'; } // left
+  if (position[2][0] === 'X' && position[1][1] === 'X' && position[0][2] === 'X') { return 'X'; }
+  if (position[2][0] === '0' && position[1][1] === '0' && position[0][2] === '0') { return '0'; }
+  return undefined;
 }
 
 
