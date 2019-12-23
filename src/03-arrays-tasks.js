@@ -605,11 +605,11 @@ function distinct(arr) {
  */
 function group(/* array, keySelector, valueSelector */) {
   throw new Error('Not implemented');
-  /* return array.reduce((obj, item) => {
-    obj[keySelector(item)] = obj[keySelector(item)] || [];
-    obj[keySelector(item)].push(valueSelector(item));
-    return obj;
-  }); */
+  /* const log = array.reduce((obj, item) => ({
+    ...obj,
+    [keySelector(item)]: valueSelector(item), // oj[keySelector(item)].push(valueSelector(item));
+  }), {});
+  return log; */
 }
 
 
